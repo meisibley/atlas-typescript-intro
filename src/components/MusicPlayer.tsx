@@ -48,6 +48,8 @@ export default function MusicPlayer() {
                         onBack={handleBack}
                         onForward={handleForward}
                         isBackDisabled={!currentSong || songs.indexOf(currentSong) === 0}
+                        onShuffleToggle={handleShuffleToggle}
+                        isShuffleOn={isShuffleOn}
                     />
                     <div className="md:hidden lg:hidden">
                         <Playlist

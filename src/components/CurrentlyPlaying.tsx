@@ -11,9 +11,11 @@ type CurrentlyPlayingProps = {
   onBack: () => void;
   onForward: () => void;
   isBackDisabled: boolean;
+  onShuffleToggle?: () => void;
+  isShuffleOn?: boolean;
 };
 
-export default function CurrentlyPlaying({ song, onBack, isBackDisabled, onForward } : CurrentlyPlayingProps) {
+export default function CurrentlyPlaying({ song, onBack, isBackDisabled, onForward, onShuffleToggle, isShuffleOn } : CurrentlyPlayingProps) {
   return (
     <div>
       <CoverArt cover={song ? song.cover : ''} />
@@ -25,6 +27,8 @@ export default function CurrentlyPlaying({ song, onBack, isBackDisabled, onForwa
         onBack={onBack}
         isBackDisabled={isBackDisabled}
         onForward={onForward}
+        onShuffleToggle={onShuffleToggle}
+        isShuffleOn={isShuffleOn}
       />
       <VolumeControl />
       <PlayListItem 

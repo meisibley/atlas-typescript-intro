@@ -1,17 +1,18 @@
 import React, { useState } from 'react';
 import shuffleIcon from '../assets/repeat-30.jpeg';
+import shuffleGrn from '../assets/repeat-grn.png';
 
 type PlayControlsProps = {
     onBack: () => void;
     onForward: () => void;
     isBackDisabled: boolean;
-    onShuffleToggle: () => void;
+    onShuffleToggle?: () => void;
     isShuffleOn?: boolean;
 };
 
 export default function PlayControls({ onBack, isBackDisabled, onForward, onShuffleToggle, isShuffleOn }: PlayControlsProps) {
     const [speed, setSpeed] = useState('1x');
-    const [isPlaying, setIsPlaying] = React.useState(false);
+    const [isPlaying, setIsPlaying] = useState(false);
     // const [isShuffleOn, setIsShuffleOn] = useState(false);
 
     const handleSpeed = () => { 
@@ -28,8 +29,13 @@ export default function PlayControls({ onBack, isBackDisabled, onForward, onShuf
     };
 
     const handleShuffle = () => {
-        onShuffleToggle();
-        console.log(isShuffleOn ? 'Shuffle off' : 'Shuffle on');
+        if (onShuffleToggle) {
+            onShuffleToggle();
+            console.log(isShuffleOn ? 'Shuffle off' : 'Shuffle on');
+        } else {
+            console.log('Shuffle toggle function is not defined');
+        }
+
     };
 
     return (
@@ -75,8 +81,7 @@ export default function PlayControls({ onBack, isBackDisabled, onForward, onShuf
                 className="p-2 bg-gray-300 hover:bg-gray-400 rounded flex items-center"
                 onClick={handleShuffle}
             >
-                <img src={shuffleIcon} alt="Shuffle" className="w-6 h-6" />
-                <span className="ml-2">{isShuffleOn ? 'On' : 'Off'}</span>
+                <img src={isShuffleOn? shuffleGrn : shuffleIcon} alt="Shuffle" className="w-6 h-6" />
             </button>
         </div>
     );
