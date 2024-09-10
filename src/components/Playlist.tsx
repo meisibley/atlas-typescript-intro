@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import usePlaylistData from '../hooks/usePlaylistData';
 import { Song } from './types';
 
 type PlaylistProps = {
@@ -9,29 +10,31 @@ type PlaylistProps = {
 }
 
 const Playlist = ({ onSongSelect, setSongs, onShuffleToggle, isShuffleOn }: PlaylistProps) => {
-    const [songs, setSongsState] = useState<Song[]>([]);
-    const [loading, setLoading] = useState<boolean>(true);
-    const [error, setError] = useState<string | null>(null);
+    const { data: songs, loading, error } = usePlaylistData();
+    // const [songs, setSongsState] = useState<Song[]>([]);
+    // const [loading, setLoading] = useState<boolean>(true);
+    // const [error, setError] = useState<string | null>(null);
 
     useEffect(() => {
-        const fetchSongs = async () => {
-            try {
-                const response = await fetch('https://raw.githubusercontent.com/atlas-jswank/atlas-music-player-api/main/playlist');
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                }
-                const data: Song[] = await response.json();
-                setSongsState(data);
-                setSongs(data);
-            } catch (error) {
-                setError((error as Error).message);
-            } finally {
-                setLoading(false);
-            }
-        };
-
-        fetchSongs();
-    }, [setSongs]);
+      setSongs(songs);
+    }, [songs, setSongs]);
+    //     const fetchSongs = async () => {
+    //         try {
+    //             const response = await fetch('https://raw.githubusercontent.com/atlas-jswank/atlas-music-player-api/main/playlist');
+    //             if (!response.ok) {
+    //                 throw new Error('Network response was not ok');
+    //             }
+    //             const data: Song[] = await response.json();
+    //             setSongsState(data);
+    //             setSongs(data);
+    //         } catch (error) {
+    //             setError((error as Error).message);
+    //         } finally {
+    //             setLoading(false);
+    //         }
+    //     };
+    //     fetchSongs();
+    // }, [setSongs]);
 
     if (loading) {
         return <p>Loading...</p>;
@@ -61,6 +64,6 @@ const Playlist = ({ onSongSelect, setSongs, onShuffleToggle, isShuffleOn }: Play
             </div>
         </div>
     );
-}
+};
 
 export default Playlist;
