@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 export default function VolumeControl() {
     const [volume, setVolume] = useState(50);
 
-    const handleVolumeChange = (event) => {
+    const handleVolumeChange = (event: any) => {
         setVolume(event.target.value);
     };
 

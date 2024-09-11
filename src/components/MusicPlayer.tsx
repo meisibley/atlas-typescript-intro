@@ -57,6 +57,7 @@ export default function MusicPlayer() {
                             setSongs={setSongs}
                             onShuffleToggle={handleShuffleToggle}
                             isShuffleOn={isShuffleOn}
+                            currentSong={currentSong}
                         />
                     </div>
                 </div>
@@ -67,6 +68,7 @@ export default function MusicPlayer() {
                         setSongs={setSongs}
                         onShuffleToggle={handleShuffleToggle}
                         isShuffleOn={isShuffleOn}
+                        currentSong={currentSong}
                     />
                 </div>
             </div>

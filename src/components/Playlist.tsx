@@ -7,9 +7,10 @@ type PlaylistProps = {
     setSongs: (songs: Song[]) => void;
     onShuffleToggle?: () => void;
     isShuffleOn?: boolean;
+    currentSong: Song | null;
 }
 
-const Playlist = ({ onSongSelect, setSongs, onShuffleToggle, isShuffleOn }: PlaylistProps) => {
+const Playlist = ({ onSongSelect, setSongs, onShuffleToggle, isShuffleOn, currentSong }: PlaylistProps) => {
     const { data: songs, loading, error } = usePlaylistData();
     // const [songs, setSongsState] = useState<Song[]>([]);
     // const [loading, setLoading] = useState<boolean>(true);
@@ -48,11 +49,19 @@ const Playlist = ({ onSongSelect, setSongs, onShuffleToggle, isShuffleOn }: Play
         <div className="p-4 bg-gray-light rounded-md">
             <h1 className="text-black text-xl font-bold p-2">Playlist</h1>
             <div className="space-y-2">
-                {songs.map((song) => (
+                {songs.map((song) => {
+                    const isSelected = currentSong && currentSong.title === song.title;
+
+                    return (
                     <div
                         key={song.title + song.artist}
-                        className="flex justify-between items-center mt-2 hover:bg-purple-300 active:bg-blue-300 cursor-pointer"
-                        onClick={() => onSongSelect(song)}
+                        // className="flex justify-between items-center mt-2 hover:bg-purple-300 active:bg-blue-300 cursor-pointer"
+                        className={`flex justify-between items-center mt-2 cursor-pointer ${
+                            isSelected ? 'bg-yellow' : 'hover:bg-purple-300 active:bg-blue-300'
+                        }`}
+                        onClick={() => {
+                            onSongSelect(song)
+                        }}
                     >
                         <div className="w-1/2">
                             <h2 className="text-black text-md font-semibold pl-2">{song.title}</h2>
@@ -60,7 +69,8 @@ const Playlist = ({ onSongSelect, setSongs, onShuffleToggle, isShuffleOn }: Play
                         </div>
                         <div className="w-1/2 text-gray font-semibold text-right pr-2">{song.duration}</div>
                     </div>
-                ))}
+                    );
+                })}
             </div>
         </div>
     );
