@@ -55,8 +55,6 @@ export default function MusicPlayer() {
                         <Playlist
                             onSongSelect={handleSongSelect}
                             setSongs={setSongs}
-                            onShuffleToggle={handleShuffleToggle}
-                            isShuffleOn={isShuffleOn}
                             currentSong={currentSong}
                         />
                     </div>
@@ -66,8 +64,6 @@ export default function MusicPlayer() {
                     <Playlist
                         onSongSelect={handleSongSelect}
                         setSongs={setSongs}
-                        onShuffleToggle={handleShuffleToggle}
-                        isShuffleOn={isShuffleOn}
                         currentSong={currentSong}
                     />
                 </div>
