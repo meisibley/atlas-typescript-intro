@@ -3,7 +3,7 @@ import CoverArt from './CoverArt';
 import SongTitle from './SongTitle';
 import PlayControls from './PlayControls';
 import VolumeControl from './VolumeControl';
-import PlayListItem from "./PlayListItem";
+// import PlayListItem from "./PlayListItem";
 import { Song } from './types';
 
 type CurrentlyPlayingProps = {
@@ -31,11 +31,11 @@ export default function CurrentlyPlaying({ song, onBack, isBackDisabled, onForwa
         isShuffleOn={isShuffleOn}
       />
       <VolumeControl />
-      <PlayListItem 
+      {/* <PlayListItem 
         title={song ? song.title : 'No Song Item'}
         genre={song ? song.genre : ''}
         duration={song ? song.duration : ''}
-      />
+      /> */}
     </div>
   );
 }
